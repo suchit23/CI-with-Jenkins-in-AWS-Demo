@@ -1,0 +1,10 @@
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+#               try_files $uri $uri/ =404;
+                include /etc/nginx/proxy_params;
+                proxy_pass          http://localhost:8080;
+                proxy_read_timeout  90s;
+                # Fix potential "It appears that your reverse proxy set up is broken" error.
+                proxy_redirect      http://localhost:8080 http://localhost;
+        }
